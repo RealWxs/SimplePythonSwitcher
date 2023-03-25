@@ -1,24 +1,23 @@
 from delegator import Delegator
 
-
 delegator = Delegator()
 
-
-@delegator.delegate(1)
-def handleFunc1():
-    print("handleFunc1")
+@delegator.delegate('drink')
+def drink(juice):
+    print(f"drink {juice}")
 
 @delegator.delegate(2)
-def handleFunc2(arg):
-    print("handleFunc2, arg: {}".format(arg))
+def eat(food, dessert):
+    print(f"eat {food} and {dessert}")
 
 @delegator.default
-def defaultHandler():
-    print("defaultHandler")
+def sleep():
+    print("sleeping")
 
 
 if __name__ == "__main__":
-    delegator.switch(1)
-    delegator.switch(2, "hello")
-    delegator.switch(3)
+    delegator.switch("drink", "apple juice")
+    delegator.switch(2, food="pizza", dessert="ice cream")
+    delegator.switch(None)
+    delegator.dispatch("drink")("orange juice")
     

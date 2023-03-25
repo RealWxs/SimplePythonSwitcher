@@ -23,6 +23,12 @@ class Delegator:
             print("default option not found")
             return None
         return func(*args, **kwargs)
+    
+    def dispatch(self, case_name):
+        func = self.delegations.get(case_name, self.delegations['default'])
+        if not func:
+            return lambda *args, **kwargs: None
+        return func
             
     
   
